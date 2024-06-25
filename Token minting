@@ -19,4 +19,9 @@ contract MyToken is ERC20 {
     function burn(uint256 amount) external {
         _burn(msg.sender, amount);
     }
+
+    function transfer(address recipient, uint256 amount) public override returns (bool) {
+        require(recipient != address(0), "Cannot transfer to the zero address"); // Custom logic
+        return super.transfer(recipient, amount); // Call the original transfer function
+    }
 }
